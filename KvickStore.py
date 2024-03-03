@@ -4,7 +4,6 @@ from typing import Union, Any
 class KvickStore:
     def __init__(self):
         self.db = {}
-        self.type_error = TypeError("Key must be of type int, str or tuple")
 
     def __setitem__(self, key: Union[int, str, tuple], val: Any) -> Any:
         """
@@ -66,7 +65,7 @@ class KvickStore:
         The method internally transforms the key using a private method `_transform_key_forward` before storing the value in the database. This transformation is applied to ensure the key conforms to the storage requirements of the data store.
         """
         if not isinstance(key, (int, str, tuple)):
-            raise self.type_error
+            raise TypeError("Key must be of type int, str or tuple")
 
         key = self._transform_key_forward(key)
         self.db[key] = val
@@ -90,7 +89,7 @@ class KvickStore:
         Before attempting to retrieve the value, the key is transformed using a private method `_transform_key_forward` to ensure it matches the format expected by the data store. This transformation is crucial for the accurate retrieval of data.
         """
         if not isinstance(key, (int, str, tuple)):
-            raise self.type_error
+            raise TypeError("Key must be of type int, str or tuple")
 
         key = self._transform_key_forward(key)
         try:
@@ -117,7 +116,7 @@ class KvickStore:
         The key is transformed using a private method `_transform_key_forward` before attempting the removal. This transformation ensures that the key conforms to the expected format of the data store's keys, facilitating accurate key lookup and removal.
         """
         if not isinstance(key, (int, str, tuple)):
-            raise self.type_error
+            raise TypeError("Key must be of type int, str or tuple")
 
         key = self._transform_key_forward(key)
         try:
@@ -154,3 +153,34 @@ class KvickStore:
         The order of the values in the returned list is determined by the order of the corresponding keys in the data store. As such, this order may change when new key-value pairs are added or existing ones are removed. However, for most implementations of Python 3.7 and above, dictionaries maintain insertion order, which is likely to be reflected in the order of the returned values.
         """
         return list(self.db.values())
+
+    def append(self, key: Union[int, str, tuple], val_to_append: Any) -> Any:
+        """
+        Appends a value to an existing value in the data store.
+
+        This method allows for the appending of a value to any value in the data store. If the key exists and the value is a list, the new value will be appended to the list. If the value is not a list , the method will make a list consisting of the existing value and append the new value to this new list. If the key does not exist, the method will return False.
+
+        Parameters:
+        - key (Union[int, str, tuple]): The key of the list to which the value is to be appended. The key must be of type int, str, or tuple. If a key of a different type is provided, a TypeError will be raised.
+        - val (Any): The value to be appended to the list.
+
+        Returns:
+        - Tuple: The key and a list of values (old and new). If the key does not exist, False is returned.
+
+        Raises:
+        - TypeError: If the provided key is not of type int, str, or tuple.
+
+        Note:
+        Before attempting to append the value, the key is transformed using a private method `_transform_key_forward` to ensure it matches the format expected by the data store. This transformation is crucial for the accurate retrieval of data.
+        """
+        if not isinstance(key, (int, str, tuple)):
+            raise TypeError("Key must be of type int, str or tuple")
+
+        key = self._transform_key_forward(key)
+        try:
+            vals = self.db[key]
+            vals = [vals] if not isinstance(vals, list) else vals
+            vals.append(val_to_append)
+            return (self._transform_key_backward(key), vals)
+        except KeyError:
+            return False
