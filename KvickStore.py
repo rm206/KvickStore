@@ -18,6 +18,12 @@ class KvickStore:
         """
         return self.get(key)
 
+    def __delitem__(self, key: Union[int, str, tuple]) -> Any:
+        """
+        Allows the use of the del operator to remove a key-value pair
+        """
+        return self.rm(key)
+
     def _transform_key_forward(self, key: Union[int, tuple]) -> str:
         """
         Internal function to transform the key to a string for JSON serialization
