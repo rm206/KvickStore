@@ -107,6 +107,7 @@ class KvickStore:
 
         try:
             return self.db[self._transform_key_forward(key)]
+
         except KeyError:
             return False
 
@@ -140,6 +141,7 @@ class KvickStore:
         try:
             popped_val = self.db.pop(self._transform_key_forward(key))
             return (key, popped_val)
+
         except KeyError:
             return False
 
@@ -211,6 +213,7 @@ class KvickStore:
             vals = [vals]
             vals.append(val_to_append)
             return (key, vals)
+
         except KeyError:
             return False
 
