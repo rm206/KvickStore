@@ -1,1 +1,1 @@
-# kvick_store
+# KvickStore
