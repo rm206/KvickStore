@@ -1,4 +1,4 @@
-from typing import Union, Any
+from typing import Union, Any, Iterable
 import ast
 
 
@@ -23,6 +23,28 @@ class KvickStore:
         Allows the use of the del operator to remove a key-value pair
         """
         return self.rm(key)
+
+    def __len__(self) -> int:
+        """
+        Allows the use of the len() function to get the number of keys
+        """
+        return self.totalkeys()
+
+    def __contains__(self, key: Union[int, float, str, list, tuple]) -> bool:
+        """
+        Allows the use of the in operator to check if a key exists
+        """
+        return self.exists(key)
+
+    def _check_key_format_error(self, key: Union[int, float, str, list, tuple]) -> None:
+        """
+        Internal function to raise a TypeError or ValueError if the key is of an invalid type or format
+        """
+        if not isinstance(key, (int, float, str, list, tuple)):
+            raise TypeError("Key must be of type int, str or tuple")
+
+        if isinstance(key, str) and key.startswith("~num~"):
+            raise ValueError("Key cannot start with ~num~ (reserved for internal use)")
 
     def _transform_key_forward(self, key: Union[int, float, str, list, tuple]) -> str:
         """
@@ -70,11 +92,8 @@ class KvickStore:
         Due to JSON limitations, if a dictionary is stored as a value, trying to have non-string keys will raise a TypeError.
         The method internally transforms the key using a private method `_transform_key_forward` before storing the value in the database. This transformation is applied to ensure the key conforms to the storage requirements of the data store.
         """
-        if not isinstance(key, (int, float, str, list, tuple)):
-            raise TypeError("Key must be of type int, str or tuple")
 
-        if isinstance(key, str) and key.startswith("~num~"):
-            raise ValueError("Key cannot start with ~num~ (reserved for internal use)")
+        self._check_key_format_error(key)
 
         self.db[self._transform_key_forward(key)] = val
 
@@ -99,11 +118,8 @@ class KvickStore:
         Note:
         Before attempting to retrieve the value, the key is transformed using a private method `_transform_key_forward` to ensure it matches the format expected by the data store. This transformation is crucial for the accurate retrieval of data.
         """
-        if not isinstance(key, (int, float, str, list, tuple)):
-            raise TypeError("Key must be of type int, str or tuple")
 
-        if isinstance(key, str) and key.startswith("~num~"):
-            raise ValueError("Key cannot start with ~num~ (reserved for internal use)")
+        self._check_key_format_error(key)
 
         try:
             return self.db[self._transform_key_forward(key)]
@@ -132,11 +148,8 @@ class KvickStore:
         Note:
         The key is transformed using a private method `_transform_key_forward` before attempting the removal. This transformation ensures that the key conforms to the expected format of the data store's keys, facilitating accurate key lookup and removal.
         """
-        if not isinstance(key, (int, float, str, list, tuple)):
-            raise TypeError("Key must be of type int, str or tuple")
 
-        if isinstance(key, str) and key.startswith("~num~"):
-            raise ValueError("Key cannot start with ~num~ (reserved for internal use)")
+        self._check_key_format_error(key)
 
         try:
             popped_val = self.db.pop(self._transform_key_forward(key))
@@ -202,11 +215,8 @@ class KvickStore:
         Note:
         Before attempting to append the value, the key is transformed using a private method `_transform_key_forward` to ensure it matches the format expected by the data store. This transformation is crucial for the accurate retrieval of data.
         """
-        if not isinstance(key, (int, float, str, list, tuple)):
-            raise TypeError("Key must be of type int, str or tuple")
 
-        if isinstance(key, str) and key.startswith("~num~"):
-            raise ValueError("Key cannot start with ~num~ (reserved for internal use)")
+        self._check_key_format_error(key)
 
         try:
             vals = self.db[self._transform_key_forward(key)]
@@ -244,11 +254,8 @@ class KvickStore:
         Note:
         Before attempting to add the value, the key is transformed using a private method `_transform_key_forward` to ensure it matches the format expected by the data store. This transformation is crucial for the accurate retrieval of data.
         """
-        if not isinstance(key, (int, float, str, list, tuple)):
-            raise TypeError("Key must be of type int, str or tuple")
 
-        if isinstance(key, str) and key.startswith("~num~"):
-            raise ValueError("Key cannot start with ~num~ (reserved for internal use)")
+        self._check_key_format_error(key)
 
         try:
             key = self._transform_key_forward(key)
@@ -261,6 +268,171 @@ class KvickStore:
             if isinstance(val, str) and isinstance(val_to_add, str):
                 self.db[key] = val + val_to_add
                 return (self._transform_key_backward(key), val + val_to_add)
+
+            return False
+
+        except KeyError:
+            return False
+
+    def exists(self, key: Union[int, float, str, list, tuple]) -> bool:
+        """
+        Checks if a key exists in the data store.
+
+        This method checks if a key exists in the data store.
+
+        Parameters:
+        - key (Union[int, float, str, list, tuple]): The key to be checked.
+
+        Returns:
+        - bool: True if the key exists in the data store, False otherwise.
+
+        Raises:
+        - TypeError: If the provided key is not of type int, str, or tuple.
+        - ValueError: If the provided key is a string and starts with "~num~".
+
+        Note:
+        Before attempting to check the existence of the key, the key is transformed using a private method `_transform_key_forward` to ensure it matches the format expected by the data store. This transformation is crucial for the accurate retrieval of data.
+        """
+
+        self._check_key_format_error(key)
+
+        return self._transform_key_forward(key) in self.db
+
+    def totalkeys(self) -> int:
+        """
+        Returns the total number of keys in the data store.
+
+        This method returns the total number of keys in the data store.
+
+        Returns:
+        - int: The total number of keys in the data store.
+        """
+        return len(self.db)
+
+    def list_create(self, key: Union[int, float, str, list, tuple]) -> None:
+        """
+        Creates a list with the given key.
+
+        This method creates a list with the given key.
+        If the key already exists, the method will put the given value in a list.
+
+        Parameters:
+        - key (Union[int, float, str, list, tuple]): The key to be created.
+
+        Returns:
+        - None: The method does not return any value.
+
+        Raises:
+        - TypeError: If the provided key is not of type int, str, or tuple.
+        - ValueError: If the provided key is a string and starts with "~num~".
+
+        Note:
+        Before attempting to create the list, the key is transformed using a private method `_transform_key_forward` to ensure it matches the format expected by the data store. This transformation is crucial for the accurate retrieval of data.
+        """
+
+        self._check_key_format_error(key)
+
+        key = self._transform_key_forward(key)
+
+        if key not in self.db:
+            self.db[key] = []
+        else:
+            self.db[key] = [self.db[key]]
+
+    def list_add(self, key: Union[int, float, str, list, tuple], val: Any) -> Any:
+        """
+        Adds a value to a list in the data store.
+
+        Calls the append method to add a value to a list in the data store.
+        """
+
+        self.append(key, val)
+
+    def list_getall(self, key: Union[int, float, str, list, tuple]) -> Any:
+        """
+        Returns the values associated with a key as a list.
+
+        If the key does not exist, the method will return False.
+
+        Parameters:
+        - key (Union[int, float, str, list, tuple]): The key for retrieval.
+
+        Returns:
+        - Any: The values associated with the key as a list. If the key does not exist, False is returned.
+
+        Raises:
+        - TypeError: If the provided key is not of type int, str, or tuple.
+        - ValueError: If the provided key is a string and starts with "~num~".
+        """
+
+        self._check_key_format_error(key)
+
+        try:
+            return list(self.db[self._transform_key_forward(key)])
+
+        except:
+            return False
+
+    def list_extend(
+        self, key: Union[int, float, str, list, tuple], iterable_val: Iterable
+    ) -> Any:
+        """
+        Extends the list with the given iterable sequence. Uses the Python extend method to achieve this.
+
+        If the key does not exist or the given value is not an iterable, the method will return False.
+        If the value associated with the key is not a list (including tuples), the value will be converted to a list with the existing value and then extended with the given iterable sequence.
+
+        Parameters:
+        - key (Union[int, float, str, list, tuple]): The key for retrieval.
+
+        Returns:
+        - Any: The key and the extended sequence of values associated with the key as a list. If the key does not exist, False is returned.
+
+        Raises:
+        - TypeError: If the provided key is not of type int, str, or tuple.
+        - ValueError: If the provided key is a string and starts with "~num~".
+        """
+
+        self._check_key_format_error(key)
+
+        if not isinstance(iterable_val, Iterable):
+            return False
+
+        try:
+            val = list(self.db[self._transform_key_forward(key)])
+            val.extend(iterable_val)
+            self.db[self._transform_key_forward(key)] = val
+            return (key, val)
+
+        except KeyError:
+            return False
+
+    def list_empty(self, key: Union[int, float, str, list, tuple]) -> Any:
+        """
+        Empties the list associated with the given key.
+
+        If the key does not exist, the method will return False.
+        If the value with the given key is not a list, the method will return False.
+
+        Parameters:
+        - key (Union[int, float, str, list, tuple]): The key for retrieval.
+
+        Returns:
+        - Any: Returns True if the operation is succesful. If the key does not exist or the value associated with the given key is not a list, False is returned.
+
+        Raises:
+        - TypeError: If the provided key is not of type int, str, or tuple.
+        - ValueError: If the provided key is a string and starts with "~num~".
+        """
+
+        self._check_key_format_error(key)
+
+        try:
+            val = self.db[self._transform_key_forward(key)]
+
+            if isinstance(val, list):
+                self.db[self._transform_key_forward(key)] = []
+                return True
 
             return False
 
