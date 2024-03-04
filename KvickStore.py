@@ -74,7 +74,8 @@ class KvickStore:
         If the file is empty, a new data store is created.
         """
         try:
-            self.db = json.load(open(self.location, "r"))
+            with open(self.location, "r") as f:
+                self.db = json.load(f)
 
         except ValueError:
             if os.stat(self.location).st_size == 0:
@@ -292,8 +293,9 @@ class KvickStore:
 
         try:
             vals = self.db[self._transform_key_forward(key)]
-            vals = [vals]
+            vals = list(vals)
             vals.append(val_to_append)
+            self.db[self._transform_key_forward(key)] = vals
             self._auto_save()
             return (key, vals)
 
@@ -517,3 +519,21 @@ class KvickStore:
 
         except KeyError:
             return False
+
+
+def load(location: str, auto_save: bool = False) -> KvickStore:
+    """
+    Loads a data store from a file. If the file does not exist, a new data store is created.
+
+    Parameters:
+    - location (str): The location of the file to be loaded.
+    - auto_save (bool): If True, the data store will be saved automatically after every operation that modifies the data store. If False, the data store will not be saved automatically. The default value is False.
+
+    Returns:
+    - KvickStore: A KvickStore object that represents the data store loaded from the file.
+
+    Raises:
+    - ValueError: If the file exists but is empty or if the file exists but is not a valid JSON file.
+    """
+
+    return KvickStore(location, auto_save)
