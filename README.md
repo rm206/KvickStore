@@ -4,7 +4,7 @@ Love puns? Love lighweight and safe key-value stores? Then you'll love KvickStor
 
 KvickStore is a simple and lightweight key-value store based on the [json](https://docs.python.org/3/library/json.html) module. It has been __heavily__ inspired by [pickleDB](https://github.com/patx/pickledb/) but I aim to make it more flexible.
 
-__This repo is under construction! Please be careful incase you decide to use it.__
+__This repo is under construction (Apha Stage)! Please be careful incase you decide to use it.__
 
 <br/>
 
