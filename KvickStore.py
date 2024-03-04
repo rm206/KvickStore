@@ -92,13 +92,14 @@ class KvickStore:
         if os.stat(f.name).st_size != 0:
             os.replace(f.name, self.location)
 
-    def save(self) -> None:
+    def save(self) -> bool:
         """
         Saves the data store to a file.
         """
         self.save_thread = Thread(target=self._save)
         self.save_thread.start()
         self.save_thread.join()
+        return True
 
     def _auto_save(self) -> None:
         """
