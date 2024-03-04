@@ -1,10 +1,18 @@
 from typing import Union, Any, Iterable
 import ast
+import os
+import json
+from threading import Thread
+from tempfile import NamedTemporaryFile
+import signal
+import sys
 
 
 class KvickStore:
-    def __init__(self):
-        self.db = {}
+    def __init__(self, location: str, auto_save: bool = False):
+        self.load(location, auto_save)
+        self.save_thread = None
+        self.set_sigterm_handler()
 
     def __setitem__(self, key: Union[int, float, str, list, tuple], val: Any) -> Any:
         """
@@ -35,6 +43,68 @@ class KvickStore:
         Allows the use of the in operator to check if a key exists
         """
         return self.exists(key)
+
+    def set_sigterm_handler(self) -> None:
+        """
+        Assigns a handler to the SIGTERM signal to save the data store (during self.save) before the program exits
+        """
+
+        def sigterm_handler(*args, **kwargs):
+            if self.save_thread is not None:
+                self.save_thread.join()
+            sys.exit(0)
+
+        signal.signal(signal.SIGTERM, sigterm_handler)
+
+    def load(self, location: str, auto_save: bool = False) -> None:
+        """
+        Loads a data store from a file. If the file does not exist, a new data store is created.
+        """
+        self.location = os.path.expanduser(location)
+        self.auto_save = auto_save
+
+        if os.path.exists(self.location):
+            self._load()
+        else:
+            self.db = {}
+
+    def _load(self) -> None:
+        """
+        Load data store from a file.
+        If the file is empty, a new data store is created.
+        """
+        try:
+            self.db = json.load(open(self.location, "r"))
+
+        except ValueError:
+            if os.stat(self.location).st_size == 0:
+                self.db = {}
+            else:
+                raise ValueError("Invalid JSON format")
+
+    def _save(self) -> None:
+        """
+        Save to a temp file then move to the real file.
+        """
+        with NamedTemporaryFile(mode="w", delete=False) as f:
+            json.dump(self.db, f)
+        if os.stat(f.name).st_size != 0:
+            os.replace(f.name, self.location)
+
+    def save(self) -> None:
+        """
+        Saves the data store to a file.
+        """
+        self.save_thread = Thread(target=self._save)
+        self.save_thread.start()
+        self.save_thread.join()
+
+    def _auto_save(self) -> None:
+        """
+        Save to file if auto_save is on
+        """
+        if self.auto_save:
+            self.save()
 
     def _check_key_format_error(self, key: Union[int, float, str, list, tuple]) -> None:
         """
@@ -96,6 +166,7 @@ class KvickStore:
         self._check_key_format_error(key)
 
         self.db[self._transform_key_forward(key)] = val
+        self._auto_save()
 
     def get(self, key: Union[int, float, str, list, tuple]) -> Any:
         """
@@ -153,6 +224,7 @@ class KvickStore:
 
         try:
             popped_val = self.db.pop(self._transform_key_forward(key))
+            self._auto_save()
             return (key, popped_val)
 
         except KeyError:
@@ -222,6 +294,7 @@ class KvickStore:
             vals = self.db[self._transform_key_forward(key)]
             vals = [vals]
             vals.append(val_to_append)
+            self._auto_save()
             return (key, vals)
 
         except KeyError:
@@ -263,10 +336,12 @@ class KvickStore:
 
             if isinstance(val, (int, float)) and isinstance(val_to_add, (int, float)):
                 self.db[key] = val + val_to_add
+                self._auto_save()
                 return (self._transform_key_backward(key), val + val_to_add)
 
             if isinstance(val, str) and isinstance(val_to_add, str):
                 self.db[key] = val + val_to_add
+                self._auto_save()
                 return (self._transform_key_backward(key), val + val_to_add)
 
             return False
@@ -339,6 +414,8 @@ class KvickStore:
         else:
             self.db[key] = [self.db[key]]
 
+        self._auto_save()
+
     def list_add(self, key: Union[int, float, str, list, tuple], val: Any) -> Any:
         """
         Adds a value to a list in the data store.
@@ -402,6 +479,7 @@ class KvickStore:
             val = list(self.db[self._transform_key_forward(key)])
             val.extend(iterable_val)
             self.db[self._transform_key_forward(key)] = val
+            self._auto_save()
             return (key, val)
 
         except KeyError:
@@ -432,6 +510,7 @@ class KvickStore:
 
             if isinstance(val, list):
                 self.db[self._transform_key_forward(key)] = []
+                self._auto_save()
                 return True
 
             return False
