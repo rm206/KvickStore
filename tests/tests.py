@@ -1,6 +1,6 @@
 import unittest
 import os
-from KvickStore import KvickStore
+from KvickStore.KvickStore import KvickStore
 
 
 class TestKvickStore(unittest.TestCase):
