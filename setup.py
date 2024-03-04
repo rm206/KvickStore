@@ -7,7 +7,6 @@ setup(
     author_email="panicpark60@gmail.com",
     version="{{VERSION_PLACEHOLDER}}",
     url="https://github.com/rm206/KvickStore",
-    download_url="https://github.com/rm206/KvickStore/archive/refs/tags/v0.0.1.tar.gz",
     description="A quick and simple key-value store for Python applications",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
