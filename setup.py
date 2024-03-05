@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="KvickStore",
-    version="0.0.1",
+    version="0.0.2",
     author="Rishabh Mediratta",
     author_email="panicpark60@gmail.com",
     description="A quick and simple key-value store for Python applications",
