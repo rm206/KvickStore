@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module KvickStore</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title">KvickStore</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:/Users/rishabh/Desktop/KvickStore/KvickStore/KvickStore.py">/Users/rishabh/Desktop/KvickStore/KvickStore/KvickStore.py</a></td></tr></table>
+    <p></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="ast.html">ast</a><br>
+<a href="json.html">json</a><br>
+</td><td class="multicolumn"><a href="os.html">os</a><br>
+<a href="signal.html">signal</a><br>
+</td><td class="multicolumn"><a href="sys.html">sys</a><br>
+</td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="KvickStore.html#KvickStore">KvickStore</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="KvickStore">class <strong>KvickStore</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#KvickStore">KvickStore</a>(location:&nbsp;str,&nbsp;auto_save:&nbsp;bool&nbsp;=&nbsp;False)<br>
+&nbsp;<br>
+<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="KvickStore-__contains__"><strong>__contains__</strong></a>(self, key: Union[int, float, str, list, tuple]) -&gt; bool</dt><dd><span class="code">Allows&nbsp;the&nbsp;use&nbsp;of&nbsp;the&nbsp;in&nbsp;operator&nbsp;to&nbsp;check&nbsp;if&nbsp;a&nbsp;key&nbsp;exists</span></dd></dl>
+
+<dl><dt><a name="KvickStore-__delitem__"><strong>__delitem__</strong></a>(self, key: Union[int, float, str, list, tuple]) -&gt; Any</dt><dd><span class="code">Allows&nbsp;the&nbsp;use&nbsp;of&nbsp;the&nbsp;del&nbsp;operator&nbsp;to&nbsp;remove&nbsp;a&nbsp;key-value&nbsp;pair</span></dd></dl>
+
+<dl><dt><a name="KvickStore-__getitem__"><strong>__getitem__</strong></a>(self, key: Union[int, float, str, list, tuple]) -&gt; Any</dt><dd><span class="code">Allows&nbsp;the&nbsp;use&nbsp;of&nbsp;the&nbsp;[]&nbsp;operator&nbsp;to&nbsp;get&nbsp;a&nbsp;value</span></dd></dl>
+
+<dl><dt><a name="KvickStore-__init__"><strong>__init__</strong></a>(self, location: str, auto_save: bool = False)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="KvickStore-__len__"><strong>__len__</strong></a>(self) -&gt; int</dt><dd><span class="code">Allows&nbsp;the&nbsp;use&nbsp;of&nbsp;the&nbsp;len()&nbsp;function&nbsp;to&nbsp;get&nbsp;the&nbsp;number&nbsp;of&nbsp;keys</span></dd></dl>
+
+<dl><dt><a name="KvickStore-__setitem__"><strong>__setitem__</strong></a>(self, key: Union[int, float, str, list, tuple], val: Any) -&gt; Any</dt><dd><span class="code">Allows&nbsp;the&nbsp;use&nbsp;of&nbsp;the&nbsp;[]&nbsp;operator&nbsp;to&nbsp;set&nbsp;a&nbsp;value</span></dd></dl>
+
+<dl><dt><a name="KvickStore-add_to_str_or_num"><strong>add_to_str_or_num</strong></a>(self, key: Union[int, float, str, list, tuple], val_to_add: Union[int, float, str]) -&gt; Any</dt><dd><span class="code">Adds&nbsp;a&nbsp;value&nbsp;to&nbsp;an&nbsp;existing&nbsp;value&nbsp;in&nbsp;the&nbsp;data&nbsp;store&nbsp;only&nbsp;if&nbsp;the&nbsp;value&nbsp;associated&nbsp;with&nbsp;the&nbsp;given&nbsp;key&nbsp;is&nbsp;a&nbsp;int,&nbsp;float&nbsp;or&nbsp;a&nbsp;str.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;key&nbsp;exists&nbsp;and&nbsp;the&nbsp;value&nbsp;is&nbsp;an&nbsp;int,&nbsp;float&nbsp;or&nbsp;a&nbsp;str,&nbsp;the&nbsp;new&nbsp;value&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;int&nbsp;or&nbsp;float&nbsp;or&nbsp;new&nbsp;str&nbsp;will&nbsp;be&nbsp;appened&nbsp;to&nbsp;the&nbsp;existing&nbsp;str.<br>
+If&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;an&nbsp;int,&nbsp;float&nbsp;or&nbsp;a&nbsp;str,&nbsp;the&nbsp;method&nbsp;will&nbsp;return&nbsp;False.<br>
+If&nbsp;there&nbsp;is&nbsp;a&nbsp;mismatch&nbsp;in&nbsp;the&nbsp;types&nbsp;of&nbsp;the&nbsp;existing&nbsp;value&nbsp;and&nbsp;the&nbsp;value&nbsp;to&nbsp;be&nbsp;added,&nbsp;the&nbsp;method&nbsp;will&nbsp;return&nbsp;False.<br>
+If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist,&nbsp;the&nbsp;method&nbsp;will&nbsp;return&nbsp;False.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;key&nbsp;(Union[int,&nbsp;float,&nbsp;str,&nbsp;list,&nbsp;tuple]):&nbsp;The&nbsp;key&nbsp;of&nbsp;the&nbsp;int&nbsp;to&nbsp;which&nbsp;the&nbsp;value&nbsp;is&nbsp;to&nbsp;be&nbsp;added.&nbsp;The&nbsp;key&nbsp;must&nbsp;be&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.&nbsp;If&nbsp;a&nbsp;key&nbsp;of&nbsp;a&nbsp;different&nbsp;type&nbsp;is&nbsp;provided,&nbsp;a&nbsp;TypeError&nbsp;will&nbsp;be&nbsp;raised.<br>
+-&nbsp;val_to_add&nbsp;(Union[int,&nbsp;float,&nbsp;str]):&nbsp;The&nbsp;value&nbsp;to&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;value.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;Any:&nbsp;The&nbsp;key&nbsp;and&nbsp;the&nbsp;new&nbsp;value.&nbsp;If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist&nbsp;or&nbsp;there&nbsp;is&nbsp;a&nbsp;mismatch&nbsp;in&nbsp;the&nbsp;types&nbsp;of&nbsp;value&nbsp;to&nbsp;be&nbsp;added&nbsp;and&nbsp;the&nbsp;existing&nbsp;value,&nbsp;False&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+Raises:<br>
+-&nbsp;TypeError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;not&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.<br>
+-&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;a&nbsp;string&nbsp;and&nbsp;starts&nbsp;with&nbsp;"~num~".<br>
+&nbsp;<br>
+Note:<br>
+Before&nbsp;attempting&nbsp;to&nbsp;add&nbsp;the&nbsp;value,&nbsp;the&nbsp;key&nbsp;is&nbsp;transformed&nbsp;using&nbsp;a&nbsp;private&nbsp;method&nbsp;`_transform_key_forward`&nbsp;to&nbsp;ensure&nbsp;it&nbsp;matches&nbsp;the&nbsp;format&nbsp;expected&nbsp;by&nbsp;the&nbsp;data&nbsp;store.&nbsp;This&nbsp;transformation&nbsp;is&nbsp;crucial&nbsp;for&nbsp;the&nbsp;accurate&nbsp;retrieval&nbsp;of&nbsp;data.</span></dd></dl>
+
+<dl><dt><a name="KvickStore-append"><strong>append</strong></a>(self, key: Union[int, float, str, list, tuple], val_to_append: Any) -&gt; Any</dt><dd><span class="code">Appends&nbsp;a&nbsp;value&nbsp;to&nbsp;an&nbsp;existing&nbsp;value&nbsp;in&nbsp;the&nbsp;data&nbsp;store.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;allows&nbsp;for&nbsp;the&nbsp;appending&nbsp;of&nbsp;a&nbsp;value&nbsp;to&nbsp;any&nbsp;value&nbsp;in&nbsp;the&nbsp;data&nbsp;store.<br>
+If&nbsp;the&nbsp;key&nbsp;exists&nbsp;and&nbsp;the&nbsp;value&nbsp;is&nbsp;a&nbsp;list,&nbsp;the&nbsp;new&nbsp;value&nbsp;will&nbsp;be&nbsp;appended&nbsp;to&nbsp;the&nbsp;list.<br>
+If&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;a&nbsp;list&nbsp;,&nbsp;the&nbsp;method&nbsp;will&nbsp;make&nbsp;a&nbsp;list&nbsp;consisting&nbsp;of&nbsp;the&nbsp;existing&nbsp;value&nbsp;and&nbsp;append&nbsp;the&nbsp;new&nbsp;value&nbsp;to&nbsp;this&nbsp;new&nbsp;list.<br>
+If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist,&nbsp;the&nbsp;method&nbsp;will&nbsp;return&nbsp;False.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;key&nbsp;(Union[int,&nbsp;float,&nbsp;str,&nbsp;list,&nbsp;tuple]):&nbsp;The&nbsp;key&nbsp;of&nbsp;the&nbsp;list&nbsp;to&nbsp;which&nbsp;the&nbsp;value&nbsp;is&nbsp;to&nbsp;be&nbsp;appended.&nbsp;The&nbsp;key&nbsp;must&nbsp;be&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.&nbsp;If&nbsp;a&nbsp;key&nbsp;of&nbsp;a&nbsp;different&nbsp;type&nbsp;is&nbsp;provided,&nbsp;a&nbsp;TypeError&nbsp;will&nbsp;be&nbsp;raised.<br>
+-&nbsp;val&nbsp;(Any):&nbsp;The&nbsp;value&nbsp;to&nbsp;be&nbsp;appended&nbsp;to&nbsp;the&nbsp;list.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;Any:&nbsp;The&nbsp;key&nbsp;and&nbsp;a&nbsp;list&nbsp;of&nbsp;values&nbsp;(old&nbsp;and&nbsp;new).&nbsp;If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist,&nbsp;False&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+Raises:<br>
+-&nbsp;TypeError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;not&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.<br>
+-&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;a&nbsp;string&nbsp;and&nbsp;starts&nbsp;with&nbsp;"~num~".<br>
+&nbsp;<br>
+Note:<br>
+Before&nbsp;attempting&nbsp;to&nbsp;append&nbsp;the&nbsp;value,&nbsp;the&nbsp;key&nbsp;is&nbsp;transformed&nbsp;using&nbsp;a&nbsp;private&nbsp;method&nbsp;`_transform_key_forward`&nbsp;to&nbsp;ensure&nbsp;it&nbsp;matches&nbsp;the&nbsp;format&nbsp;expected&nbsp;by&nbsp;the&nbsp;data&nbsp;store.&nbsp;This&nbsp;transformation&nbsp;is&nbsp;crucial&nbsp;for&nbsp;the&nbsp;accurate&nbsp;retrieval&nbsp;of&nbsp;data.</span></dd></dl>
+
+<dl><dt><a name="KvickStore-exists"><strong>exists</strong></a>(self, key: Union[int, float, str, list, tuple]) -&gt; bool</dt><dd><span class="code">Checks&nbsp;if&nbsp;a&nbsp;key&nbsp;exists&nbsp;in&nbsp;the&nbsp;data&nbsp;store.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;checks&nbsp;if&nbsp;a&nbsp;key&nbsp;exists&nbsp;in&nbsp;the&nbsp;data&nbsp;store.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;key&nbsp;(Union[int,&nbsp;float,&nbsp;str,&nbsp;list,&nbsp;tuple]):&nbsp;The&nbsp;key&nbsp;to&nbsp;be&nbsp;checked.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;bool:&nbsp;True&nbsp;if&nbsp;the&nbsp;key&nbsp;exists&nbsp;in&nbsp;the&nbsp;data&nbsp;store,&nbsp;False&nbsp;otherwise.<br>
+&nbsp;<br>
+Raises:<br>
+-&nbsp;TypeError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;not&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.<br>
+-&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;a&nbsp;string&nbsp;and&nbsp;starts&nbsp;with&nbsp;"~num~".<br>
+&nbsp;<br>
+Note:<br>
+Before&nbsp;attempting&nbsp;to&nbsp;check&nbsp;the&nbsp;existence&nbsp;of&nbsp;the&nbsp;key,&nbsp;the&nbsp;key&nbsp;is&nbsp;transformed&nbsp;using&nbsp;a&nbsp;private&nbsp;method&nbsp;`_transform_key_forward`&nbsp;to&nbsp;ensure&nbsp;it&nbsp;matches&nbsp;the&nbsp;format&nbsp;expected&nbsp;by&nbsp;the&nbsp;data&nbsp;store.&nbsp;This&nbsp;transformation&nbsp;is&nbsp;crucial&nbsp;for&nbsp;the&nbsp;accurate&nbsp;retrieval&nbsp;of&nbsp;data.</span></dd></dl>
+
+<dl><dt><a name="KvickStore-get"><strong>get</strong></a>(self, key: Union[int, float, str, list, tuple]) -&gt; Any</dt><dd><span class="code">Retrieves&nbsp;a&nbsp;value&nbsp;from&nbsp;the&nbsp;data&nbsp;store&nbsp;based&nbsp;on&nbsp;the&nbsp;given&nbsp;key.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;looks&nbsp;up&nbsp;a&nbsp;value&nbsp;in&nbsp;the&nbsp;data&nbsp;store&nbsp;using&nbsp;the&nbsp;specified&nbsp;key.<br>
+If&nbsp;the&nbsp;key&nbsp;exists,&nbsp;the&nbsp;corresponding&nbsp;value&nbsp;is&nbsp;returned.<br>
+If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist,&nbsp;the&nbsp;method&nbsp;returns&nbsp;False,&nbsp;indicating&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;value&nbsp;for&nbsp;the&nbsp;given&nbsp;key.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;key&nbsp;(Union[int,&nbsp;float,&nbsp;str,&nbsp;list,&nbsp;tuple]):&nbsp;The&nbsp;key&nbsp;for&nbsp;which&nbsp;the&nbsp;value&nbsp;is&nbsp;to&nbsp;be&nbsp;retrieved.&nbsp;The&nbsp;key&nbsp;must&nbsp;be&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.&nbsp;If&nbsp;a&nbsp;key&nbsp;of&nbsp;a&nbsp;different&nbsp;type&nbsp;is&nbsp;provided,&nbsp;a&nbsp;TypeError&nbsp;will&nbsp;be&nbsp;raised.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;Any:&nbsp;The&nbsp;value&nbsp;associated&nbsp;with&nbsp;the&nbsp;given&nbsp;key&nbsp;in&nbsp;the&nbsp;data&nbsp;store.&nbsp;If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist,&nbsp;False&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+Raises:<br>
+-&nbsp;TypeError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;not&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.<br>
+-&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;a&nbsp;string&nbsp;and&nbsp;starts&nbsp;with&nbsp;"~num~".<br>
+&nbsp;<br>
+Note:<br>
+Before&nbsp;attempting&nbsp;to&nbsp;retrieve&nbsp;the&nbsp;value,&nbsp;the&nbsp;key&nbsp;is&nbsp;transformed&nbsp;using&nbsp;a&nbsp;private&nbsp;method&nbsp;`_transform_key_forward`&nbsp;to&nbsp;ensure&nbsp;it&nbsp;matches&nbsp;the&nbsp;format&nbsp;expected&nbsp;by&nbsp;the&nbsp;data&nbsp;store.&nbsp;This&nbsp;transformation&nbsp;is&nbsp;crucial&nbsp;for&nbsp;the&nbsp;accurate&nbsp;retrieval&nbsp;of&nbsp;data.</span></dd></dl>
+
+<dl><dt><a name="KvickStore-get_all_keys"><strong>get_all_keys</strong></a>(self) -&gt; list</dt><dd><span class="code">Retrieves&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;the&nbsp;keys&nbsp;currently&nbsp;stored&nbsp;in&nbsp;the&nbsp;data&nbsp;store.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;provides&nbsp;a&nbsp;way&nbsp;to&nbsp;access&nbsp;all&nbsp;the&nbsp;keys&nbsp;in&nbsp;the&nbsp;data&nbsp;store,&nbsp;allowing&nbsp;for&nbsp;further&nbsp;operations&nbsp;such&nbsp;as&nbsp;iteration&nbsp;over&nbsp;keys,&nbsp;inspection&nbsp;of&nbsp;the&nbsp;data&nbsp;store's&nbsp;content,&nbsp;or&nbsp;performing&nbsp;bulk&nbsp;operations.<br>
+The&nbsp;keys&nbsp;are&nbsp;returned&nbsp;in&nbsp;a&nbsp;list,&nbsp;reflecting&nbsp;their&nbsp;current&nbsp;state&nbsp;in&nbsp;the&nbsp;data&nbsp;store.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;list:&nbsp;A&nbsp;list&nbsp;of&nbsp;all&nbsp;keys&nbsp;present&nbsp;in&nbsp;the&nbsp;data&nbsp;store.&nbsp;The&nbsp;type&nbsp;of&nbsp;the&nbsp;keys&nbsp;in&nbsp;the&nbsp;list&nbsp;will&nbsp;match&nbsp;the&nbsp;types&nbsp;of&nbsp;the&nbsp;keys&nbsp;when&nbsp;they&nbsp;were&nbsp;added&nbsp;to&nbsp;the&nbsp;store,&nbsp;which&nbsp;can&nbsp;include&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple&nbsp;types,&nbsp;depending&nbsp;on&nbsp;the&nbsp;data&nbsp;store's&nbsp;usage.<br>
+&nbsp;<br>
+Note:<br>
+The&nbsp;order&nbsp;of&nbsp;the&nbsp;keys&nbsp;in&nbsp;the&nbsp;returned&nbsp;list&nbsp;is&nbsp;not&nbsp;guaranteed&nbsp;and&nbsp;depends&nbsp;on&nbsp;the&nbsp;underlying&nbsp;data&nbsp;structure's&nbsp;ordering,&nbsp;which&nbsp;in&nbsp;most&nbsp;Python&nbsp;versions&nbsp;is&nbsp;insertion&nbsp;order&nbsp;for&nbsp;dictionaries.</span></dd></dl>
+
+<dl><dt><a name="KvickStore-get_all_values"><strong>get_all_values</strong></a>(self) -&gt; list</dt><dd><span class="code">Retrieves&nbsp;all&nbsp;the&nbsp;values&nbsp;currently&nbsp;stored&nbsp;in&nbsp;the&nbsp;data&nbsp;store.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;compiles&nbsp;a&nbsp;list&nbsp;of&nbsp;all&nbsp;values&nbsp;from&nbsp;the&nbsp;data&nbsp;store,&nbsp;providing&nbsp;a&nbsp;snapshot&nbsp;of&nbsp;its&nbsp;content&nbsp;at&nbsp;the&nbsp;moment&nbsp;of&nbsp;invocation.<br>
+It's&nbsp;useful&nbsp;for&nbsp;operations&nbsp;that&nbsp;require&nbsp;inspection&nbsp;or&nbsp;processing&nbsp;of&nbsp;every&nbsp;stored&nbsp;value.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;list:&nbsp;A&nbsp;list&nbsp;containing&nbsp;every&nbsp;value&nbsp;stored&nbsp;in&nbsp;the&nbsp;data&nbsp;store.&nbsp;The&nbsp;types&nbsp;of&nbsp;the&nbsp;values&nbsp;can&nbsp;vary,&nbsp;reflecting&nbsp;the&nbsp;heterogeneous&nbsp;nature&nbsp;of&nbsp;the&nbsp;data&nbsp;stored,&nbsp;which&nbsp;can&nbsp;include&nbsp;but&nbsp;is&nbsp;not&nbsp;limited&nbsp;to,&nbsp;integers,&nbsp;strings,&nbsp;lists,&nbsp;dictionaries,&nbsp;or&nbsp;any&nbsp;other&nbsp;data&nbsp;type&nbsp;that&nbsp;has&nbsp;been&nbsp;added&nbsp;to&nbsp;the&nbsp;store.<br>
+&nbsp;<br>
+Note:<br>
+The&nbsp;order&nbsp;of&nbsp;the&nbsp;values&nbsp;in&nbsp;the&nbsp;returned&nbsp;list&nbsp;is&nbsp;determined&nbsp;by&nbsp;the&nbsp;order&nbsp;of&nbsp;the&nbsp;corresponding&nbsp;keys&nbsp;in&nbsp;the&nbsp;data&nbsp;store.&nbsp;As&nbsp;such,&nbsp;this&nbsp;order&nbsp;may&nbsp;change&nbsp;when&nbsp;new&nbsp;key-value&nbsp;pairs&nbsp;are&nbsp;added&nbsp;or&nbsp;existing&nbsp;ones&nbsp;are&nbsp;removed.&nbsp;However,&nbsp;for&nbsp;most&nbsp;implementations&nbsp;of&nbsp;Python&nbsp;3.7&nbsp;and&nbsp;above,&nbsp;dictionaries&nbsp;maintain&nbsp;insertion&nbsp;order,&nbsp;which&nbsp;is&nbsp;likely&nbsp;to&nbsp;be&nbsp;reflected&nbsp;in&nbsp;the&nbsp;order&nbsp;of&nbsp;the&nbsp;returned&nbsp;values.</span></dd></dl>
+
+<dl><dt><a name="KvickStore-list_add"><strong>list_add</strong></a>(self, key: Union[int, float, str, list, tuple], val: Any) -&gt; Any</dt><dd><span class="code">Adds&nbsp;a&nbsp;value&nbsp;to&nbsp;a&nbsp;list&nbsp;in&nbsp;the&nbsp;data&nbsp;store.<br>
+&nbsp;<br>
+Calls&nbsp;the&nbsp;append&nbsp;method&nbsp;to&nbsp;add&nbsp;a&nbsp;value&nbsp;to&nbsp;a&nbsp;list&nbsp;in&nbsp;the&nbsp;data&nbsp;store.</span></dd></dl>
+
+<dl><dt><a name="KvickStore-list_create"><strong>list_create</strong></a>(self, key: Union[int, float, str, list, tuple]) -&gt; None</dt><dd><span class="code">Creates&nbsp;a&nbsp;list&nbsp;with&nbsp;the&nbsp;given&nbsp;key.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;creates&nbsp;a&nbsp;list&nbsp;with&nbsp;the&nbsp;given&nbsp;key.<br>
+If&nbsp;the&nbsp;key&nbsp;already&nbsp;exists,&nbsp;the&nbsp;method&nbsp;will&nbsp;put&nbsp;the&nbsp;given&nbsp;value&nbsp;in&nbsp;a&nbsp;list.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;key&nbsp;(Union[int,&nbsp;float,&nbsp;str,&nbsp;list,&nbsp;tuple]):&nbsp;The&nbsp;key&nbsp;to&nbsp;be&nbsp;created.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;None:&nbsp;The&nbsp;method&nbsp;does&nbsp;not&nbsp;return&nbsp;any&nbsp;value.<br>
+&nbsp;<br>
+Raises:<br>
+-&nbsp;TypeError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;not&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.<br>
+-&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;a&nbsp;string&nbsp;and&nbsp;starts&nbsp;with&nbsp;"~num~".<br>
+&nbsp;<br>
+Note:<br>
+Before&nbsp;attempting&nbsp;to&nbsp;create&nbsp;the&nbsp;list,&nbsp;the&nbsp;key&nbsp;is&nbsp;transformed&nbsp;using&nbsp;a&nbsp;private&nbsp;method&nbsp;`_transform_key_forward`&nbsp;to&nbsp;ensure&nbsp;it&nbsp;matches&nbsp;the&nbsp;format&nbsp;expected&nbsp;by&nbsp;the&nbsp;data&nbsp;store.&nbsp;This&nbsp;transformation&nbsp;is&nbsp;crucial&nbsp;for&nbsp;the&nbsp;accurate&nbsp;retrieval&nbsp;of&nbsp;data.</span></dd></dl>
+
+<dl><dt><a name="KvickStore-list_empty"><strong>list_empty</strong></a>(self, key: Union[int, float, str, list, tuple]) -&gt; Any</dt><dd><span class="code">Empties&nbsp;the&nbsp;list&nbsp;associated&nbsp;with&nbsp;the&nbsp;given&nbsp;key.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist,&nbsp;the&nbsp;method&nbsp;will&nbsp;return&nbsp;False.<br>
+If&nbsp;the&nbsp;value&nbsp;with&nbsp;the&nbsp;given&nbsp;key&nbsp;is&nbsp;not&nbsp;a&nbsp;list,&nbsp;the&nbsp;method&nbsp;will&nbsp;return&nbsp;False.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;key&nbsp;(Union[int,&nbsp;float,&nbsp;str,&nbsp;list,&nbsp;tuple]):&nbsp;The&nbsp;key&nbsp;for&nbsp;retrieval.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;Any:&nbsp;Returns&nbsp;True&nbsp;if&nbsp;the&nbsp;operation&nbsp;is&nbsp;succesful.&nbsp;If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist&nbsp;or&nbsp;the&nbsp;value&nbsp;associated&nbsp;with&nbsp;the&nbsp;given&nbsp;key&nbsp;is&nbsp;not&nbsp;a&nbsp;list,&nbsp;False&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+Raises:<br>
+-&nbsp;TypeError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;not&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.<br>
+-&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;a&nbsp;string&nbsp;and&nbsp;starts&nbsp;with&nbsp;"~num~".</span></dd></dl>
+
+<dl><dt><a name="KvickStore-list_extend"><strong>list_extend</strong></a>(self, key: Union[int, float, str, list, tuple], iterable_val: Iterable) -&gt; Any</dt><dd><span class="code">Extends&nbsp;the&nbsp;list&nbsp;with&nbsp;the&nbsp;given&nbsp;iterable&nbsp;sequence.&nbsp;Uses&nbsp;the&nbsp;Python&nbsp;extend&nbsp;method&nbsp;to&nbsp;achieve&nbsp;this.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist&nbsp;or&nbsp;the&nbsp;given&nbsp;value&nbsp;is&nbsp;not&nbsp;an&nbsp;iterable,&nbsp;the&nbsp;method&nbsp;will&nbsp;return&nbsp;False.<br>
+If&nbsp;the&nbsp;value&nbsp;associated&nbsp;with&nbsp;the&nbsp;key&nbsp;is&nbsp;not&nbsp;a&nbsp;list&nbsp;(including&nbsp;tuples),&nbsp;the&nbsp;value&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;a&nbsp;list&nbsp;with&nbsp;the&nbsp;existing&nbsp;value&nbsp;and&nbsp;then&nbsp;extended&nbsp;with&nbsp;the&nbsp;given&nbsp;iterable&nbsp;sequence.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;key&nbsp;(Union[int,&nbsp;float,&nbsp;str,&nbsp;list,&nbsp;tuple]):&nbsp;The&nbsp;key&nbsp;for&nbsp;retrieval.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;Any:&nbsp;The&nbsp;key&nbsp;and&nbsp;the&nbsp;extended&nbsp;sequence&nbsp;of&nbsp;values&nbsp;associated&nbsp;with&nbsp;the&nbsp;key&nbsp;as&nbsp;a&nbsp;list.&nbsp;If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist,&nbsp;False&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+Raises:<br>
+-&nbsp;TypeError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;not&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.<br>
+-&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;a&nbsp;string&nbsp;and&nbsp;starts&nbsp;with&nbsp;"~num~".</span></dd></dl>
+
+<dl><dt><a name="KvickStore-list_getall"><strong>list_getall</strong></a>(self, key: Union[int, float, str, list, tuple]) -&gt; Any</dt><dd><span class="code">Returns&nbsp;the&nbsp;values&nbsp;associated&nbsp;with&nbsp;a&nbsp;key&nbsp;as&nbsp;a&nbsp;list.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist,&nbsp;the&nbsp;method&nbsp;will&nbsp;return&nbsp;False.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;key&nbsp;(Union[int,&nbsp;float,&nbsp;str,&nbsp;list,&nbsp;tuple]):&nbsp;The&nbsp;key&nbsp;for&nbsp;retrieval.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;Any:&nbsp;The&nbsp;values&nbsp;associated&nbsp;with&nbsp;the&nbsp;key&nbsp;as&nbsp;a&nbsp;list.&nbsp;If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist,&nbsp;False&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+Raises:<br>
+-&nbsp;TypeError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;not&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.<br>
+-&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;a&nbsp;string&nbsp;and&nbsp;starts&nbsp;with&nbsp;"~num~".</span></dd></dl>
+
+<dl><dt><a name="KvickStore-load"><strong>load</strong></a>(self, location: str, auto_save: bool = False) -&gt; None</dt><dd><span class="code">Loads&nbsp;a&nbsp;data&nbsp;store&nbsp;from&nbsp;a&nbsp;file.&nbsp;If&nbsp;the&nbsp;file&nbsp;does&nbsp;not&nbsp;exist,&nbsp;a&nbsp;new&nbsp;data&nbsp;store&nbsp;is&nbsp;created.</span></dd></dl>
+
+<dl><dt><a name="KvickStore-rm"><strong>rm</strong></a>(self, key: Union[int, float, str, list, tuple]) -&gt; Any</dt><dd><span class="code">Removes&nbsp;a&nbsp;key-value&nbsp;pair&nbsp;from&nbsp;the&nbsp;data&nbsp;store&nbsp;and&nbsp;returns&nbsp;the&nbsp;value.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;attempts&nbsp;to&nbsp;remove&nbsp;a&nbsp;value&nbsp;associated&nbsp;with&nbsp;the&nbsp;given&nbsp;key&nbsp;from&nbsp;the&nbsp;data&nbsp;store.<br>
+If&nbsp;the&nbsp;key&nbsp;exists,&nbsp;the&nbsp;key-value&nbsp;pair&nbsp;is&nbsp;removed,&nbsp;and&nbsp;the&nbsp;removed&nbsp;key&nbsp;and&nbsp;value&nbsp;is&nbsp;returned.<br>
+If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist,&nbsp;the&nbsp;method&nbsp;returns&nbsp;False,&nbsp;indicating&nbsp;that&nbsp;no&nbsp;operation&nbsp;was&nbsp;performed&nbsp;for&nbsp;the&nbsp;given&nbsp;key.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;key&nbsp;(Union[int,&nbsp;float,&nbsp;str,&nbsp;list,&nbsp;tuple]):&nbsp;The&nbsp;key&nbsp;of&nbsp;the&nbsp;value&nbsp;to&nbsp;be&nbsp;removed.&nbsp;The&nbsp;key&nbsp;must&nbsp;be&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.&nbsp;If&nbsp;a&nbsp;key&nbsp;of&nbsp;a&nbsp;different&nbsp;type&nbsp;is&nbsp;provided,&nbsp;a&nbsp;TypeError&nbsp;will&nbsp;be&nbsp;raised.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;Any:&nbsp;The&nbsp;removed&nbsp;key&nbsp;and&nbsp;value&nbsp;associated&nbsp;with&nbsp;the&nbsp;removed&nbsp;key&nbsp;from&nbsp;the&nbsp;data&nbsp;store.&nbsp;If&nbsp;the&nbsp;key&nbsp;does&nbsp;not&nbsp;exist,&nbsp;False&nbsp;is&nbsp;returned.<br>
+&nbsp;<br>
+Raises:<br>
+-&nbsp;TypeError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;not&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.<br>
+-&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;a&nbsp;string&nbsp;and&nbsp;starts&nbsp;with&nbsp;"~num~".<br>
+&nbsp;<br>
+Note:<br>
+The&nbsp;key&nbsp;is&nbsp;transformed&nbsp;using&nbsp;a&nbsp;private&nbsp;method&nbsp;`_transform_key_forward`&nbsp;before&nbsp;attempting&nbsp;the&nbsp;removal.&nbsp;This&nbsp;transformation&nbsp;ensures&nbsp;that&nbsp;the&nbsp;key&nbsp;conforms&nbsp;to&nbsp;the&nbsp;expected&nbsp;format&nbsp;of&nbsp;the&nbsp;data&nbsp;store's&nbsp;keys,&nbsp;facilitating&nbsp;accurate&nbsp;key&nbsp;lookup&nbsp;and&nbsp;removal.</span></dd></dl>
+
+<dl><dt><a name="KvickStore-save"><strong>save</strong></a>(self) -&gt; bool</dt><dd><span class="code">Saves&nbsp;the&nbsp;data&nbsp;store&nbsp;to&nbsp;a&nbsp;file.</span></dd></dl>
+
+<dl><dt><a name="KvickStore-set"><strong>set</strong></a>(self, key: Union[int, float, str, list, tuple], val: Any) -&gt; None</dt><dd><span class="code">Sets&nbsp;a&nbsp;value&nbsp;in&nbsp;the&nbsp;data&nbsp;store.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;assigns&nbsp;a&nbsp;given&nbsp;value&nbsp;to&nbsp;a&nbsp;specified&nbsp;key&nbsp;within&nbsp;the&nbsp;data&nbsp;store.<br>
+If&nbsp;the&nbsp;key&nbsp;already&nbsp;exists,&nbsp;the&nbsp;existing&nbsp;value&nbsp;will&nbsp;be&nbsp;overwritten&nbsp;with&nbsp;the&nbsp;new&nbsp;value.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;key&nbsp;(Union[int,&nbsp;float,&nbsp;str,&nbsp;list,&nbsp;tuple]):&nbsp;The&nbsp;key&nbsp;under&nbsp;which&nbsp;the&nbsp;value&nbsp;is&nbsp;stored.&nbsp;The&nbsp;key&nbsp;must&nbsp;be&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.&nbsp;If&nbsp;a&nbsp;key&nbsp;of&nbsp;a&nbsp;different&nbsp;type&nbsp;is&nbsp;provided,&nbsp;a&nbsp;TypeError&nbsp;will&nbsp;be&nbsp;raised.<br>
+-&nbsp;val&nbsp;(Any):&nbsp;The&nbsp;value&nbsp;to&nbsp;be&nbsp;stored&nbsp;in&nbsp;the&nbsp;data&nbsp;store.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;None:&nbsp;The&nbsp;method&nbsp;does&nbsp;not&nbsp;return&nbsp;any&nbsp;value.<br>
+&nbsp;<br>
+Raises:<br>
+-&nbsp;TypeError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;not&nbsp;of&nbsp;type&nbsp;int,&nbsp;str,&nbsp;or&nbsp;tuple.<br>
+-&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;provided&nbsp;key&nbsp;is&nbsp;a&nbsp;string&nbsp;and&nbsp;starts&nbsp;with&nbsp;"~num~".<br>
+&nbsp;<br>
+Note:<br>
+Cannot&nbsp;have&nbsp;a&nbsp;string&nbsp;key&nbsp;that&nbsp;starts&nbsp;with&nbsp;"~num~"&nbsp;as&nbsp;it&nbsp;is&nbsp;reserved&nbsp;for&nbsp;internal&nbsp;use.<br>
+Tuples&nbsp;when&nbsp;stored&nbsp;as&nbsp;values&nbsp;will&nbsp;be&nbsp;converted&nbsp;to&nbsp;lists.&nbsp;When&nbsp;retrieved,&nbsp;the&nbsp;value&nbsp;will&nbsp;be&nbsp;a&nbsp;list.&nbsp;This&nbsp;is&nbsp;due&nbsp;to&nbsp;the&nbsp;fact&nbsp;that&nbsp;JSON&nbsp;does&nbsp;not&nbsp;support&nbsp;the&nbsp;storage&nbsp;of&nbsp;tuples.<br>
+Due&nbsp;to&nbsp;JSON&nbsp;limitations,&nbsp;if&nbsp;a&nbsp;dictionary&nbsp;is&nbsp;stored&nbsp;as&nbsp;a&nbsp;value,&nbsp;trying&nbsp;to&nbsp;have&nbsp;non-string&nbsp;keys&nbsp;will&nbsp;raise&nbsp;a&nbsp;TypeError.<br>
+The&nbsp;method&nbsp;internally&nbsp;transforms&nbsp;the&nbsp;key&nbsp;using&nbsp;a&nbsp;private&nbsp;method&nbsp;`_transform_key_forward`&nbsp;before&nbsp;storing&nbsp;the&nbsp;value&nbsp;in&nbsp;the&nbsp;database.&nbsp;This&nbsp;transformation&nbsp;is&nbsp;applied&nbsp;to&nbsp;ensure&nbsp;the&nbsp;key&nbsp;conforms&nbsp;to&nbsp;the&nbsp;storage&nbsp;requirements&nbsp;of&nbsp;the&nbsp;data&nbsp;store.</span></dd></dl>
+
+<dl><dt><a name="KvickStore-set_sigterm_handler"><strong>set_sigterm_handler</strong></a>(self) -&gt; None</dt><dd><span class="code">Assigns&nbsp;a&nbsp;handler&nbsp;to&nbsp;the&nbsp;SIGTERM&nbsp;signal&nbsp;to&nbsp;save&nbsp;the&nbsp;data&nbsp;store&nbsp;(during&nbsp;self.<strong>save</strong>)&nbsp;before&nbsp;the&nbsp;program&nbsp;exits</span></dd></dl>
+
+<dl><dt><a name="KvickStore-totalkeys"><strong>totalkeys</strong></a>(self) -&gt; int</dt><dd><span class="code">Returns&nbsp;the&nbsp;total&nbsp;number&nbsp;of&nbsp;keys&nbsp;in&nbsp;the&nbsp;data&nbsp;store.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;returns&nbsp;the&nbsp;total&nbsp;number&nbsp;of&nbsp;keys&nbsp;in&nbsp;the&nbsp;data&nbsp;store.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;int:&nbsp;The&nbsp;total&nbsp;number&nbsp;of&nbsp;keys&nbsp;in&nbsp;the&nbsp;data&nbsp;store.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-load"><strong>load</strong></a>(location: str, auto_save: bool = False) -&gt; KvickStore.KvickStore</dt><dd><span class="code">Loads&nbsp;a&nbsp;data&nbsp;store&nbsp;from&nbsp;a&nbsp;file.&nbsp;If&nbsp;the&nbsp;file&nbsp;does&nbsp;not&nbsp;exist,&nbsp;a&nbsp;new&nbsp;data&nbsp;store&nbsp;is&nbsp;created.<br>
+&nbsp;<br>
+Parameters:<br>
+-&nbsp;location&nbsp;(str):&nbsp;The&nbsp;location&nbsp;of&nbsp;the&nbsp;file&nbsp;to&nbsp;be&nbsp;loaded.<br>
+-&nbsp;auto_save&nbsp;(bool):&nbsp;If&nbsp;True,&nbsp;the&nbsp;data&nbsp;store&nbsp;will&nbsp;be&nbsp;saved&nbsp;automatically&nbsp;after&nbsp;every&nbsp;operation&nbsp;that&nbsp;modifies&nbsp;the&nbsp;data&nbsp;store.&nbsp;If&nbsp;False,&nbsp;the&nbsp;data&nbsp;store&nbsp;will&nbsp;not&nbsp;be&nbsp;saved&nbsp;automatically.&nbsp;The&nbsp;default&nbsp;value&nbsp;is&nbsp;False.<br>
+&nbsp;<br>
+Returns:<br>
+-&nbsp;<a href="#KvickStore">KvickStore</a>:&nbsp;A&nbsp;<a href="#KvickStore">KvickStore</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;that&nbsp;represents&nbsp;the&nbsp;data&nbsp;store&nbsp;loaded&nbsp;from&nbsp;the&nbsp;file.<br>
+&nbsp;<br>
+Raises:<br>
+-&nbsp;ValueError:&nbsp;If&nbsp;the&nbsp;file&nbsp;exists&nbsp;but&nbsp;is&nbsp;empty&nbsp;or&nbsp;if&nbsp;the&nbsp;file&nbsp;exists&nbsp;but&nbsp;is&nbsp;not&nbsp;a&nbsp;valid&nbsp;JSON&nbsp;file.</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>Iterable</strong> = typing.Iterable<br>
+<strong>Union</strong> = typing.Union</td></tr></table>
+</body></html>

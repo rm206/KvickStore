@@ -27,6 +27,7 @@ True
 
 # Link(s)
 * [GitHub repo](https://github.com/rm206/KvickStore)
+* [PyPi](https://pypi.org/project/KvickStore/)
 
 <br/>
 
